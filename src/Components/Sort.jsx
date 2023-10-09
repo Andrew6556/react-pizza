@@ -1,5 +1,15 @@
+import React from 'react'
+
 
 function Sort(){
+    const [open, setOpen]               = React.useState(false);
+    const [activeCriteria, setCriteria] = React.useState(0);
+
+    const listCriteria    = ["популярности", "цене", "алфавиту"];
+    const changePopupVisibility = (nameCategory,indexCategory) => {
+        setCriteria(indexCategory)
+        setOpen(false)
+    }
     return(
         <div className="sort">
             <div className="sort__label">
@@ -10,15 +20,24 @@ function Sort(){
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span onClick={() => setOpen(!open)}>{listCriteria[activeCriteria]}</span>
             </div>
-            <div className="sort__popup">
-                <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
-                </ul>
-            </div>
+            {open && (
+                <div className="sort__popup">
+                    <ul>
+                        {listCriteria.map((nameCategory, indexCategory) => (
+                            <li 
+                                key={indexCategory}
+                                onClick={() => changePopupVisibility(nameCategory, indexCategory)}
+                                className={activeCriteria === indexCategory ? "active": ""}
+                                >
+                                {nameCategory}
+                            </li>
+                        ))}
+                    </ul>
+                </div>)
+            }
+            
         </div>
     )
 }

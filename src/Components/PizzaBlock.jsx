@@ -35,7 +35,6 @@ function PizzaBlock({title, price, img, sizes, types}){
                             </li>
                         ))
                     }
-                    
                 </ul>
             </div>
             <div className="pizza-block__bottom">
