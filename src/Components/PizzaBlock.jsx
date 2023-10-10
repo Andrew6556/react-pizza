@@ -1,12 +1,9 @@
 import React from "react";
 
 function PizzaBlock({title, price, img, sizes, types}){
-    const typesName = ["тонкое","традиционное"];
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
-    // const a = () => {
-    //     setCount(count + 1)
-    // }
+    const typesName = ["тонкое","традиционное"];
     
     return(
         <div className="pizza-block">

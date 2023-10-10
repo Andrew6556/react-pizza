@@ -6,7 +6,7 @@ function Sort(){
     const [activeCriteria, setCriteria] = React.useState(0);
 
     const listCriteria    = ["популярности", "цене", "алфавиту"];
-    const changePopupVisibility = (nameCategory,indexCategory) => {
+    const changePopupVisibility = (indexCategory) => {
         setCriteria(indexCategory)
         setOpen(false)
     }
@@ -28,7 +28,7 @@ function Sort(){
                         {listCriteria.map((nameCategory, indexCategory) => (
                             <li 
                                 key={indexCategory}
-                                onClick={() => changePopupVisibility(nameCategory, indexCategory)}
+                                onClick={() => changePopupVisibility(indexCategory)}
                                 className={activeCriteria === indexCategory ? "active": ""}
                                 >
                                 {nameCategory}
