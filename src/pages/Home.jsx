@@ -15,6 +15,7 @@ const Home = () => {
 			setIsLoading(false)
 		}
 		getPizza()
+        window.scrollTo(0, 0)
 	}, [])
 
     return (
@@ -29,7 +30,7 @@ const Home = () => {
                 <div className="content__items">
                     {
                         isLoading 
-                            ?[...new Array(6)].map((item, itemIndex) => <Skeleton key={itemIndex} />)
+                            ? [...new Array(6)].map((item, itemIndex) => <Skeleton key={itemIndex} />)
                             : items.map(pizza => (
                                 <PizzaBlock 
                                     key   = {pizza.id} 
