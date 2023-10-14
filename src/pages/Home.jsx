@@ -36,7 +36,7 @@ const Home = () => {
                 {/* Categories component */}
                 <Categories value={categoryId} onClickCategory={(index) => setCategoryId(index)} />
                 {/* Sort component */}
-                <Sort valueSort={sortType} onChangeSort={(indexType) => setSortType(indexType)} />
+                <Sort valueSort={sortType} onChangeSort={(objSort) => setSortType(objSort)} />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
