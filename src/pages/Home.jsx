@@ -13,18 +13,16 @@ const Home = () => {
     const [sortType, setSortType]     = React.useState({
         name:"популярности",
         sort:"rating"
-        // {name:"цене", sort:"price"},
-        // {name:"алфавиту", sort:"title"}
     });
-
-
 	React.useEffect(() => {
         setIsLoading(true)
-        const urlDataPizza = "https://65255e5567cfb1e59ce72930.mockapi.io/items";
 
 		const getPizza = async () =>{
 			setItems(await(await fetch(
-                categoryId === 0 ? urlDataPizza: `https://65255e5567cfb1e59ce72930.mockapi.io/items?category=${categoryId}`)).json()
+                `https://65255e5567cfb1e59ce72930.mockapi.io/items?${
+                    categoryId > 0 ? `category=${categoryId}`: ""
+                }&sortBy=${sortType.sort}&order=desc`
+                )).json()
             )
 			setIsLoading(false)
 		}

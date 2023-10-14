@@ -9,8 +9,8 @@ function Sort({valueSort, onChangeSort}){
         {name:"цене", sort:"price"},
         {name:"алфавиту", sort:"title"}
     ];
-    const changePopupVisibility = (indexCategory) => {
-        onChangeSort(indexCategory)
+    const changePopupVisibility = objSort => {
+        onChangeSort(objSort)
         setOpen(false)
     }
     return(
@@ -28,13 +28,13 @@ function Sort({valueSort, onChangeSort}){
             {open && (
                 <div className="sort__popup">
                     <ul>
-                        {listCriteria.map((obj, indexCategory) => (
+                        {listCriteria.map((objSort, indexCategory) => (
                             <li 
                                 key={indexCategory}
-                                onClick={() => changePopupVisibility(obj)}
-                                className={valueSort.sort === obj.sort ? "active": ""}
+                                onClick={() => changePopupVisibility(objSort)}
+                                className={valueSort.sort === objSort.sort ? "active": ""}
                                 >
-                                {obj.name}
+                                {objSort.name}
                             </li>
                         ))}
                     </ul>
