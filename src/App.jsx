@@ -20,7 +20,6 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Routes>
-					{/* <Home/> */}
 				</div>
 			</div>
 		</div>

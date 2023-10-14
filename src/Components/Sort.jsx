@@ -1,13 +1,16 @@
 import React from 'react'
 
 
-function Sort(){
+function Sort({valueSort, onChangeSort}){
     const [open, setOpen]               = React.useState(false);
-    const [activeCriteria, setCriteria] = React.useState(0);
 
-    const listCriteria    = ["популярности", "цене", "алфавиту"];
+    const listCriteria = [
+        {name:"популярности",sort:"rating"},
+        {name:"цене", sort:"price"},
+        {name:"алфавиту", sort:"title"}
+    ];
     const changePopupVisibility = (indexCategory) => {
-        setCriteria(indexCategory)
+        onChangeSort(indexCategory)
         setOpen(false)
     }
     return(
@@ -20,18 +23,18 @@ function Sort(){
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{listCriteria[activeCriteria]}</span>
+                <span onClick={() => setOpen(!open)}>{valueSort.name}</span>
             </div>
             {open && (
                 <div className="sort__popup">
                     <ul>
-                        {listCriteria.map((nameCategory, indexCategory) => (
+                        {listCriteria.map((obj, indexCategory) => (
                             <li 
                                 key={indexCategory}
-                                onClick={() => changePopupVisibility(indexCategory)}
-                                className={activeCriteria === indexCategory ? "active": ""}
+                                onClick={() => changePopupVisibility(obj)}
+                                className={valueSort.sort === obj.sort ? "active": ""}
                                 >
-                                {nameCategory}
+                                {obj.name}
                             </li>
                         ))}
                     </ul>
