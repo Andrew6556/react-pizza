@@ -1,11 +1,31 @@
 
+
+
 .input{
     border-radius: 15px;
-    padding: 12px 20px;
+    padding: 12px 45px 12px 20px;
     width: 400px;
     border:1px solid rgb(0, 0, 0, 0.1);
     font-size: 18px;
     &:focus{
         border:1px solid rgb(0, 0, 0, 0.5);
+    }
+    &__wrapper{
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    &__close{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 25%;
+        right: 10px;
+        cursor: pointer;
+        opacity: 0.3;
+        transition: all ease-in-out 500ms;
+        &:hover{
+            opacity: 1;
+        }
     }
 }

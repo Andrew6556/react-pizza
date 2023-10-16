@@ -2,7 +2,7 @@ import React from 'react'
 
 
 function Sort({valueSort, onChangeSort}){
-    const [open, setOpen]               = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
     const listCriteria = [
         {name:"популярности",sort:"rating"},
@@ -40,7 +40,6 @@ function Sort({valueSort, onChangeSort}){
                     </ul>
                 </div>)
             }
-            
         </div>
     )
 }

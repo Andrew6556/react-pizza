@@ -1,10 +1,25 @@
-// import React from 'react'
-
 import styles from "./Search.module.scss"
+import close from "./img/close.svg"
 
-const Search = () => {
+
+const Search = ({searchValue, setSearchValue}) => {
     return (
-        <input className={styles.input} placeholder='Поиск пиццы...'/>
+        <div className={styles.input__wrapper}>
+            <input 
+                className = {styles.input}
+                value  = {searchValue}
+                onChange = {(event) => setSearchValue(event.target.value)}
+                placeholder = 'Поиск пиццы...'/>
+                
+            {searchValue && (
+                <img 
+                    className = {styles.input__close} 
+                    src = {close}
+                    onClick = {() => setSearchValue("")}
+                />)
+            }
+        </div>
+        
     )
 }
 export default Search
