@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { SearchContext } from '../App';
+// import { SearchContext } from '../App';
+import { useSelector} from 'react-redux'
 
 import Categories from '../Components/Categories';
 import PizzaBlock from '../Components/PizzaBlock';
@@ -11,7 +12,10 @@ import Pagination from '../Components/Pagination';
 
 
 const Home = () => {
-    const {searchValue} = React.useContext(SearchContext)
+    const searchValue = useSelector((state) => state.filter.value)
+    // console.log(filter)
+
+    // const {searchValue} = React.useContext(SearchContext)
     const [items, setItems]           = React.useState([]);
 	const [isLoading, setIsLoading]   = React.useState(true);
     const [currentPage, setCurrentPage] = React.useState(1);

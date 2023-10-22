@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: 0,
+    value: "",
 }
 
 export const filterSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        increment: (state) => {
-            state.value += 1
+        change: (state, getValue) => {
+            state.value = getValue.payload
         },
         decrement: (state) => {
             state.value -= 1
@@ -20,6 +20,6 @@ export const filterSlice = createSlice({
     },
 })
 
-export const { increment, decrement, incrementByAmount } = filterSlice.actions
+export const { change, decrement, incrementByAmount } = filterSlice.actions
 
 export default filterSlice.reducer
