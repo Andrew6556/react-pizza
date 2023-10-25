@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import { SearchContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux'
@@ -40,16 +41,20 @@ const Home = () => {
     
 	React.useEffect(() => {
         setIsLoading(true)
-
         const category = categoryId > 0 ? `category=${categoryId}`: "";
         const search   = searchValue ? `&search=${searchValue}`:"";
         const url = `https://65255e5567cfb1e59ce72930.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.typeSort}&order=desc${search}`
 
-		const getPizza = async () =>{
-			setItems(await(await fetch(url)).json())
-			setIsLoading(false)
-		}
-		getPizza()
+        axios.get(url)
+            .then(getPizzas => {
+                setItems(getPizzas.data)
+                setIsLoading(false)
+            })
+		// const getPizza = async () =>{
+		// 	setItems(await(await fetch(url)).json())
+		// 	setIsLoading(false)
+		// }
+		// getPizza()
         window.scrollTo(0, 0)
 	}, [categoryId, sort, searchValue, currentPage])
 
