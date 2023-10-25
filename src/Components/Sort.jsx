@@ -1,16 +1,21 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortType } from '../redux/slices/filterSlice';
 
 
-function Sort({valueSort, onChangeSort}){
+function Sort(){
     const [open, setOpen] = React.useState(false);
 
+    const sort = useSelector(state => state.filter.sort)
+    const dispatch = useDispatch()
+
     const listCriteria = [
-        {name:"популярности",sort:"rating"},
-        {name:"цене", sort:"price"},
-        {name:"алфавиту", sort:"title"}
+        {name:"популярности",typeSort:"rating"},
+        {name:"цене", typeSort:"price"},
+        {name:"алфавиту", typeSort:"title"}
     ];
     const changePopupVisibility = objSort => {
-        onChangeSort(objSort)
+        dispatch(setSortType(objSort))
         setOpen(false)
     }
     return(
@@ -23,7 +28,7 @@ function Sort({valueSort, onChangeSort}){
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{valueSort.name}</span>
+                <span onClick={() => setOpen(!open)}>{sort.name}</span>
             </div>
             {open && (
                 <div className="sort__popup">
@@ -32,7 +37,7 @@ function Sort({valueSort, onChangeSort}){
                             <li 
                                 key={indexCategory}
                                 onClick={() => changePopupVisibility(objSort)}
-                                className={valueSort.sort === objSort.sort ? "active": ""}
+                                className={sort.typeSort === objSort.typeSort ? "active": ""}
                                 >
                                 {objSort.name}
                             </li>

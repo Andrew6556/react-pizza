@@ -1,7 +1,8 @@
 import React from 'react';
 
-// import { SearchContext } from '../App';
-import { useSelector} from 'react-redux'
+import { SearchContext } from '../App';
+import { useDispatch, useSelector } from 'react-redux'
+import { setCategoryId } from "../redux/slices/filterSlice"
 
 import Categories from '../Components/Categories';
 import PizzaBlock from '../Components/PizzaBlock';
@@ -12,19 +13,17 @@ import Pagination from '../Components/Pagination';
 
 
 const Home = () => {
-    const searchValue = useSelector((state) => state.filter.value)
+    // const searchValue = useSelector((state) => state.filter.value)
     // console.log(filter)
 
-    // const {searchValue} = React.useContext(SearchContext)
-    const [items, setItems]           = React.useState([]);
-	const [isLoading, setIsLoading]   = React.useState(true);
+    const {searchValue} = React.useContext(SearchContext)
+    const [items, setItems]         = React.useState([]);
+	const [isLoading, setIsLoading] = React.useState(true);
     const [currentPage, setCurrentPage] = React.useState(1);
 
-    const [categoryId, setCategoryId] = React.useState(0);
-    const [sortType, setSortType]     = React.useState({
-        name:"популярности",
-        sort:"rating"
-    });
+    const {categoryId, sort} = useSelector((state) => state.filter)
+    const dispatch = useDispatch()
+
 
     const pizzas = items.map(pizza => (
         <PizzaBlock 
@@ -44,7 +43,7 @@ const Home = () => {
 
         const category = categoryId > 0 ? `category=${categoryId}`: "";
         const search   = searchValue ? `&search=${searchValue}`:"";
-        const url = `https://65255e5567cfb1e59ce72930.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortType.sort}&order=desc${search}`
+        const url = `https://65255e5567cfb1e59ce72930.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.typeSort}&order=desc${search}`
 
 		const getPizza = async () =>{
 			setItems(await(await fetch(url)).json())
@@ -52,15 +51,15 @@ const Home = () => {
 		}
 		getPizza()
         window.scrollTo(0, 0)
-	}, [categoryId, sortType, searchValue, currentPage])
+	}, [categoryId, sort, searchValue, currentPage])
 
     return (
         <>
             <div className="content__top">
                 {/* Categories component */}
-                <Categories value={categoryId} onClickCategory={(index) => setCategoryId(index)} />
+                <Categories value={categoryId} onClickCategory={(index) => dispatch(setCategoryId(index))} />
                 {/* Sort component */}
-                <Sort valueSort={sortType} onChangeSort={(objSort) => setSortType(objSort)} />
+                <Sort />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">{isLoading ? skeleton: pizzas}</div>
