@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { SearchContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId } from "../redux/slices/filterSlice"
+import { setCategoryId , setCountPage} from "../redux/slices/filterSlice"
 
 import Categories from '../Components/Categories';
 import PizzaBlock from '../Components/PizzaBlock';
@@ -20,9 +20,8 @@ const Home = () => {
     const {searchValue} = React.useContext(SearchContext)
     const [items, setItems]         = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
-    const [currentPage, setCurrentPage] = React.useState(1);
 
-    const {categoryId, sort} = useSelector((state) => state.filter)
+    const {categoryId, sort, currentPage} = useSelector((state) => state.filter)
     const dispatch = useDispatch()
 
 
@@ -50,11 +49,6 @@ const Home = () => {
                 setItems(getPizzas.data)
                 setIsLoading(false)
             })
-		// const getPizza = async () =>{
-		// 	setItems(await(await fetch(url)).json())
-		// 	setIsLoading(false)
-		// }
-		// getPizza()
         window.scrollTo(0, 0)
 	}, [categoryId, sort, searchValue, currentPage])
 
@@ -68,7 +62,7 @@ const Home = () => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">{isLoading ? skeleton: pizzas}</div>
-            <Pagination onChangePage={indexPage => setCurrentPage(indexPage)} />
+            <Pagination onChangePage={indexPage =>  dispatch(setCountPage(indexPage))}/>
         </>
     )
 }
