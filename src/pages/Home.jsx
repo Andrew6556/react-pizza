@@ -25,6 +25,7 @@ const Home = () => {
     const pizzas = items.map(pizza => (
         <PizzaBlock 
             key   = {pizza.id} 
+            id    = {pizza.id}
             title = {pizza.title} 
             price = {pizza.price} 
             img	  = {pizza.imageUrl}

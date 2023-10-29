@@ -11,6 +11,7 @@ export const cartSlice = createSlice({
     reducers: {
         appendProduct(state, actions){
             state.items.push(actions.payload)
+            state.totalPrice += actions.payload.price
         },
         removeProduct(state, actions){
             state.items = state.items.filter(obj => obj.id !== actions.payload)
