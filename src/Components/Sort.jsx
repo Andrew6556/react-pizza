@@ -20,11 +20,13 @@ function Sort(){
         
         return () => document.body.removeEventListener("click", listenToEvent)
     }, [])
+
     const listCriteria = [
         {name:"популярности",typeSort:"rating"},
         {name:"цене", typeSort:"price"},
         {name:"алфавиту", typeSort:"title"}
     ];
+    
     const changePopupVisibility = objSort => {
         dispatch(setSortType(objSort))
         setOpen(false)

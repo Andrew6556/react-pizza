@@ -14,9 +14,6 @@ import Pagination from '../Components/Pagination';
 
 
 const Home = () => {
-    // const searchValue = useSelector((state) => state.filter.value)
-    // console.log(filter)
-
     const {searchValue} = React.useContext(SearchContext)
     const [items, setItems]         = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);

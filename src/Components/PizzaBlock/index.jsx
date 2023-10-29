@@ -1,6 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { appendProduct, removeProduct, clearProduct } from "../../redux/slices/cartSlice"
+
 
 function PizzaBlock({title, price, img, sizes, types}){
+    const cart = useSelector(state => state.cart)
+
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
     const typesName = ["тонкое","традиционное"];
