@@ -2,8 +2,10 @@ import React from 'react';
 import axios from 'axios';
 
 import { SearchContext } from '../App';
+
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId , setCountPage} from "../redux/slices/filterSlice"
+import { setItems } from '../redux/slices/pizzaSlice';
 
 import Categories from '../Components/Categories';
 import PizzaBlock from '../Components/PizzaBlock';
@@ -15,12 +17,12 @@ import Pagination from '../Components/Pagination';
 
 const Home = () => {
     const {searchValue} = React.useContext(SearchContext)
-    const [items, setItems]         = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
 
+    const {items} = useSelector(state => state.pizza)
     const {categoryId, sort, currentPage} = useSelector((state) => state.filter)
-    const dispatch = useDispatch()
 
+    const dispatch = useDispatch()
 
     const pizzas = items.map(pizza => (
         <PizzaBlock 
@@ -46,7 +48,7 @@ const Home = () => {
         const getPizzas = async () => {
             try{
                 const dataPizzas = await (await axios.get(url)).data
-                setItems(dataPizzas)
+                dispatch(setItems(dataPizzas))
                 setIsLoading(false)
             }catch(error){
                 console.log(error,12121)
