@@ -7,11 +7,10 @@ export const CartItem = ({id, title, type, price, count, img }) => {
     const dispatch = useDispatch()
 
     const addPizza = () => dispatch(appendProduct({id, price}))
-    const delPizza = () => dispatch(removeProduct(id))
+    const delPizza = () => dispatch(removeProduct({id, count, price}))
     const decreaseCountPizza = () => {
-        dispatch(minusProduct(id))
-
-        if (count === 1)dispatch(removeProduct(id))
+        count === 1 ? dispatch(removeProduct({id, count, price})):
+                    dispatch(minusProduct({id, price}))
     }
     return (
         <div className="cart__item">

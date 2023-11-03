@@ -7,9 +7,7 @@ import Search from "./Search"
 
 function Header(){
 	const {totalPrice, items} = useSelector(state => state.cart)
-	const a = items.map(item => item.count)
-	// console.log(a.length)
-	const itemsCount = items.length > 1 ? a.reduce((oneNum, twoNum) => oneNum + twoNum): a[0]
+	const itemsCount = items.reduce((sum , item) => sum + item.count, 0)
     return(
 		<div className="header">
 			<div className="container">
